@@ -9,7 +9,7 @@ inputs:
   channel:
     description: Local channel and output directory
     required: true
-    default: /github/workspace/conda-build
+    default: /github/workflow/conda-build
   channels:
     description: Channels used to search packages during conda-build
     required: true

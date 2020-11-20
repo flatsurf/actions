@@ -4,7 +4,7 @@ set -xeuo pipefail
 export PYTHONUNBUFFERED=1
 
 export CONDA_BUILD_WORKSPACE="${CONDA_BUILD_WORKSPACE:-/github/workspace}"
-export CONDA_BUILD_CHANNEL="${CONDA_BUILD_CHANNEL:-/github/workspace/conda-build}"
+export CONDA_BUILD_CHANNEL="${CONDA_BUILD_CHANNEL:-/github/workflow/conda-build}"
 
 mkdir -p "$CONDA_BUILD_WORKSPACE"
 cd "${CONDA_BUILD_WORKSPACE}"

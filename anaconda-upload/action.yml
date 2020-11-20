@@ -5,7 +5,7 @@ inputs:
   packages:
     description: Path of packages to upload
     required: true
-    default: /github/workspace/conda-build/**.tar.bz2
+    default: /home/runner/work/_temp/_github_workflow/conda-build/*/**.tar.bz2
   user:
     description: Channel on anaconda.org
     required: true
