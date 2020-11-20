@@ -5,7 +5,7 @@ inputs:
   packages:
     description: Path of packages to upload
     required: true
-    default: /home/runner/work/_temp/_github_workflow/conda-build/*/**.tar.bz2
+    default: ${{ github.workspace }}/conda-build/**/*.tar.bz2
   user:
     description: Channel on anaconda.org
     required: true
@@ -17,12 +17,12 @@ runs:
   steps:
     - shell: bash
       run: |
+        export PYTHONUNBUFFERED=1
         $CONDA/bin/conda install --yes --quiet anaconda-client
-        which $CONDA/bin/anaconda
-        if [ -z $BINSTAR_TOKEN ]; then
+        if [ -z $ANACONDA_API_TOKEN ]; then
           echo "Not uploading conda package since no token was provided."
         else
-          $CONDA/bin/anaconda upload --skip-existing --user="${{ inputs.user }}" ${{ inputs.packages }}
+          $CONDA/bin/anaconda upload --skip-existing --label main ${{ inputs.packages }}
         fi
       env:
-        BINSTAR_TOKEN: ${{ inputs.token }}
+        ANACONDA_API_TOKEN: ${{ inputs.token }}
