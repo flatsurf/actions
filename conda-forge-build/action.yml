@@ -1,0 +1,34 @@
+name: conda-build like conda-forge
+description: This action uses the docker image that conda-forge uses to conda-build a recipe
+
+inputs:
+  workspace:
+    description: Workspace directory
+    required: true
+    default: /github/workspace
+  channel:
+    description: Local channel and output directory
+    required: true
+    default: /github/workspace/conda-build
+  channels:
+    description: Channels used to search packages during conda-build
+    required: true
+    default: conda-forge
+  recipe:
+    description: Location of recipe/ in the workspace
+    required: true
+    default: recipe
+  args:
+    description: Additional parameters to conda-build
+    required: false
+    default:
+runs:
+  using: docker
+  image: Dockerfile
+  env:
+    CONDA_BUILD_WORKSPACE: ${{ inputs.workspace }}
+    CONDA_BUILD_CHANNEL: ${{ inputs.channel }}
+    CONDA_BUILD_CHANNELS: ${{ inputs.channels }}
+  args:
+  - ${{ inputs.args }}
+  - ${{ inputs.recipe }}

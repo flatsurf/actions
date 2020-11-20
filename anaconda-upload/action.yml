@@ -1,0 +1,28 @@
+name: anaconda upload packages
+description: Upload conda packages to a conda channel
+
+inputs:
+  packages:
+    description: Path of packages to upload
+    required: true
+    default: /github/workspace/conda-build/**.tar.bz2
+  user:
+    description: Channel on anaconda.org
+    required: true
+  token:
+    description: Binstar access token to upload to anaconda.org
+    required: false
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        $CONDA/bin/conda install --yes --quiet anaconda-client
+        which $CONDA/bin/anaconda
+        if [ -z $BINSTAR_TOKEN ]; then
+          echo "Not uploading conda package since no token was provided."
+        else
+          $CONDA/bin/anaconda upload --user="${{ inputs.user }}" ${{ inputs.packages }}
+        fi
+      env:
+        BINSTAR_TOKEN: ${{ inputs.token }}
