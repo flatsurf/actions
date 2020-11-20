@@ -22,7 +22,7 @@ runs:
         if [ -z $BINSTAR_TOKEN ]; then
           echo "Not uploading conda package since no token was provided."
         else
-          $CONDA/bin/anaconda upload --user="${{ inputs.user }}" ${{ inputs.packages }}
+          $CONDA/bin/anaconda upload --skip-existing --user="${{ inputs.user }}" ${{ inputs.packages }}
         fi
       env:
         BINSTAR_TOKEN: ${{ inputs.token }}
