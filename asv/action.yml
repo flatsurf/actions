@@ -1,0 +1,35 @@
+name: asv benchmarks
+description: Run AirSpeedVelocity benchmarks and prepare results as github-pages
+
+runs:
+  using: composite
+  steps:
+    - name: Setup ASV Configuration
+      shell: bash -l {0}
+      run: |
+        export PYTHONUNBUFFERED=1
+
+        cat <<EOF > ~/.asv-machine.json
+        {
+            "azure": {
+                "arch": "x86_64",
+                "cpu": "Standard_DS2_v2",
+                "machine": "Azure",
+                "os": "Linux",
+                "ram": "61830880"
+            },
+            "version": 1
+        }
+        EOF
+    - name: Setup Repository
+      shell: bash -l {0}
+      run: |
+        # ASV will run benchmarks on the HEAD of master. So we need to pretend that this is where we are at the moment.
+        git checkout -b master || true
+    - name: Run Benchmarks
+      shell: bash -l {0}
+      run: asv run -v --machine=azure
+    - name: Rerender GitHub Pages
+      shell: bash -l {0}
+      run: |
+        asv publish --html-dir .asv/html
