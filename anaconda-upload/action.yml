@@ -1,6 +1,10 @@
 name: anaconda upload packages
 description: Upload conda packages to a conda channel
 
+branding:
+  icon: share
+  color: green
+
 inputs:
   packages:
     description: Path of packages to upload

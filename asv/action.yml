@@ -1,6 +1,10 @@
 name: asv benchmarks
 description: Run AirSpeedVelocity benchmarks and prepare results as github-pages
 
+branding:
+  icon: activity
+  color: white
+
 runs:
   using: composite
   steps:

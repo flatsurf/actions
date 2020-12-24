@@ -1,6 +1,10 @@
 name: conda-build like conda-forge
 description: This action uses the docker image that conda-forge uses to conda-build a recipe
 
+branding:
+  icon: package
+  color: green
+
 inputs:
   workspace:
     description: Workspace directory
