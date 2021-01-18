@@ -1,0 +1,9 @@
+name: show log files
+description: Show all .log files in groups
+
+runs:
+  using: composite
+  steps:
+    - name: show logs
+      shell: bash -l {0}
+      run: for log in `find . -name '*.log'`; do echo "::group::$log"; cat $log; echo "::endgroup"; done
