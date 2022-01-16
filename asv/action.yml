@@ -8,6 +8,10 @@ branding:
 runs:
   using: composite
   steps:
+    - name: Install ASV
+      shell: bash -l {0}
+      run: |
+        mamba install -c conda-forge/label/asv_dev --quiet --yes asv
     - name: Setup ASV Configuration
       shell: bash -l {0}
       run: |
@@ -37,18 +41,3 @@ runs:
       shell: bash -l {0}
       run: |
         asv publish --no-pull --verbose --html-dir .asv/html
-        patch -N -p0 <<EOF
-        diff --git a/asv/www/graphdisplay.js b/asv/www/graphdisplay.js
-        index d3fadcb..ef3bda2 100644
-        --- .asv/html/graphdisplay.js
-        +++ .asv/html/graphdisplay.js
-        @@ -1362,7 +1362,7 @@ $(document).ready(function() {
-
-
-             $.asv.register_page('graphdisplay', function(params) {
-        -        var benchmark = params['benchmark'];
-        +        var benchmark = decodeURIComponent(params['benchmark']);
-                 var highlight_revisions = null;
-                 var state_selection = null;
-
-        EOF
