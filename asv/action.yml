@@ -40,8 +40,8 @@ runs:
         patch -N -p0 <<EOF
         diff --git a/asv/www/graphdisplay.js b/asv/www/graphdisplay.js
         index d3fadcb..ef3bda2 100644
-        --- a/asv/www/graphdisplay.js
-        +++ b/asv/www/graphdisplay.js
+        --- .asv/html/graphdisplay.js
+        +++ .asv/html/graphdisplay.js
         @@ -1362,7 +1362,7 @@ $(document).ready(function() {
 
 
