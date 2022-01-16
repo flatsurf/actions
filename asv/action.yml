@@ -36,7 +36,7 @@ runs:
     - name: Rerender GitHub Pages
       shell: bash -l {0}
       run: |
-        asv publish --html-dir .asv/html
+        asv publish --no-pull --verbose --html-dir .asv/html
         patch -N -p0 <<EOF
         diff --git a/asv/www/graphdisplay.js b/asv/www/graphdisplay.js
         index d3fadcb..ef3bda2 100644
