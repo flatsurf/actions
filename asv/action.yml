@@ -37,3 +37,18 @@ runs:
       shell: bash -l {0}
       run: |
         asv publish --html-dir .asv/html
+        patch -N -p0 <<EOF
+        diff --git a/asv/www/graphdisplay.js b/asv/www/graphdisplay.js
+        index d3fadcb..ef3bda2 100644
+        --- a/asv/www/graphdisplay.js
+        +++ b/asv/www/graphdisplay.js
+        @@ -1362,7 +1362,7 @@ $(document).ready(function() {
+
+
+             $.asv.register_page('graphdisplay', function(params) {
+        -        var benchmark = params['benchmark'];
+        +        var benchmark = decodeURIComponent(params['benchmark']);
+                 var highlight_revisions = null;
+                 var state_selection = null;
+
+        EOF
