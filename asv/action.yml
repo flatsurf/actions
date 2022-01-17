@@ -34,6 +34,10 @@ runs:
       run: |
         # ASV will run benchmarks on the HEAD of master. So we need to pretend that this is where we are at the moment.
         git checkout -b master || true
+    - name: Update ASV database
+      shell: bash -l {0}
+      run: |
+        asv update
     - name: Run Benchmarks
       shell: bash -l {0}
       run: asv run -v --machine=azure
