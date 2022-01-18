@@ -45,7 +45,6 @@ runs:
         esac
         EOF
         chmod +x conda-mamba.sh
-        export CONDA_EXE=`pwd`/conda-mamba.sh
     - name: Setup Repository
       shell: bash -l {0}
       run: |
@@ -57,7 +56,9 @@ runs:
         asv update
     - name: Run Benchmarks
       shell: bash -l {0}
-      run: asv run -v --machine=azure
+      run: |
+        export CONDA_EXE=`pwd`/conda-mamba.sh
+        asv run -v --machine=azure
     - name: Rerender GitHub Pages
       shell: bash -l {0}
       run: |
