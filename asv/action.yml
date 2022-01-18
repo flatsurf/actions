@@ -29,6 +29,23 @@ runs:
             "version": 1
         }
         EOF
+    - name: Use Mamba
+      shell: bash -l {0}
+      run: |
+        cat <<EOF > conda-mamba.sh
+        #!/bin/bash
+
+        case $1 in
+          activate|shell.posix)
+            exec conda $@
+            ;;
+          *)
+            exec mamba $@
+            ;;
+        esac
+        EOF
+        chmod +x conda-mamba.sh
+        export CONDA_EXE=`pwd`/conda-mamba.sh
     - name: Setup Repository
       shell: bash -l {0}
       run: |
