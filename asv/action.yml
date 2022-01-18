@@ -32,7 +32,7 @@ runs:
     - name: Use Mamba
       shell: bash -l {0}
       run: |
-        cat <<EOF > conda-mamba.sh
+        cat << 'EOF' > conda-mamba.sh
         #!/bin/bash
 
         case $1 in
