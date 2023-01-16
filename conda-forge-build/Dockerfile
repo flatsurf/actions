@@ -1,4 +1,4 @@
-FROM condaforge/linux-anvil-comp7
+FROM condaforge/linux-anvil-cos7-x86_64
 
 RUN /opt/conda/bin/conda config --set channel_priority strict
 
