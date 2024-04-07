@@ -10,7 +10,7 @@ mkdir -p "$CONDA_BUILD_WORKSPACE"
 cd "${CONDA_BUILD_WORKSPACE}"
 
 mkdir -p "$CONDA_BUILD_CHANNEL"
-/opt/conda/bin/conda index --no-progress "$CONDA_BUILD_CHANNEL"
+/opt/conda/bin/conda index "$CONDA_BUILD_CHANNEL"
 
 
 conda_build () {
@@ -40,4 +40,4 @@ conda_build () {
 
 conda_build "$@"
 
-/opt/conda/bin/conda index --no-progress "$CONDA_BUILD_CHANNEL"
+/opt/conda/bin/conda index "$CONDA_BUILD_CHANNEL"
