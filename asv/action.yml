@@ -12,6 +12,8 @@ runs:
       shell: bash -l {0}
       run: |
         mamba install --quiet --yes asv
+        # Work around https://github.com/airspeed-velocity/asv/issues/1396 until it is fixed in the published asv.
+        mamba install --quiet --yes 'conda<24.3'
     - name: Setup ASV Configuration
       shell: bash -l {0}
       run: |
