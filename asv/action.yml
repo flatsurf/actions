@@ -11,7 +11,7 @@ runs:
     - name: Install ASV
       shell: bash -l {0}
       run: |
-        mamba install -c conda-forge/label/asv_dev --quiet --yes asv
+        mamba install --quiet --yes asv
     - name: Setup ASV Configuration
       shell: bash -l {0}
       run: |
