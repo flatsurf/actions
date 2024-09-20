@@ -5,15 +5,22 @@ branding:
   icon: activity
   color: white
 
+inputs:
+  packages:
+    description: Whether to use "mamba" or "pixi" to install packages.
+    required: false
+    default: mamba
+
 runs:
   using: composite
   steps:
-    - name: Install ASV
+    - name: Install ASV (mamba)
       shell: bash -l {0}
       run: |
         mamba install --quiet --yes asv
         # Work around https://github.com/airspeed-velocity/asv/issues/1396 until it is fixed in the published asv.
         mamba install -n base --quiet --yes 'conda<24.3'
+      if: ${{ inputs.packages == 'mamba' }}
     - name: Setup ASV Configuration
       shell: bash -l {0}
       run: |
