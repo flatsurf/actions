@@ -43,10 +43,16 @@ runs:
       run: |
         # ASV will run benchmarks on the HEAD of master. So we need to pretend that this is where we are at the moment.
         git checkout -b master || true
-    - name: Run Benchmarks
+    - name: Run Benchmarks (mamba)
       shell: bash -l {0}
       run: |
         asv run -v --machine=azure
+      if: ${{ inputs.packages == 'mamba' }}
+    - name: Run Benchmarks (pixi)
+      shell: bash -l {0}
+      run: |
+        asv run -v --machine=azure --python=same
+      if: ${{ inputs.packages == 'pixi' }}
     - name: Rerender GitHub Pages
       shell: bash -l {0}
       run: |
